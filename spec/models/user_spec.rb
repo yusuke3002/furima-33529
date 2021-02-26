@@ -42,10 +42,10 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
-      it 'last_name_rubyが空では登録できない'do
-      @user.last_name_ruby = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Last name ruby can't be blank")
+      it 'last_name_rubyが空では登録できない' do
+        @user.last_name_ruby = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name ruby can't be blank")
       end
       it 'first_name_rubyが空では登録できない' do
         @user.first_name_ruby = ''
@@ -66,7 +66,7 @@ RSpec.describe User, type: :model do
       it 'emailに＠が無いと登録できない' do
         @user.email = 'aaaaaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'passwordが5文字以下では登録できない' do
         @user.password = 'aaa00'
@@ -78,7 +78,7 @@ RSpec.describe User, type: :model do
         @user.password = '000000'
         @user.password_confirmation = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Please include both letters and numbers")
+        expect(@user.errors.full_messages).to include('Password Please include both letters and numbers')
       end
       it 'passwordとpassword_confirmationが不一致では登録できないこと' do
         @user.password = 'aaa000'
