@@ -29,7 +29,7 @@
 | prefecture_id      | integer    | null: false                    |
 | delivery_days_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
-| nickname           | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
