@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "items#index"
-  resources :items, onry: :new
+  resources :items, onry: [:new, :create]
 end
