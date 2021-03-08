@@ -72,10 +72,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price Please use half-width numbers")
       end
 
-      it 'priceは¥300〜¥9,999,999でないと出品できない' do
+      it 'priceは半角英数字では出品できない' do
+        @item.price = '100a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Please use half-width numbers")
+      end
+
+      it 'priceは半角英字では出品できない' do
+        @item.price = 'aaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Please use half-width numbers")
+      end
+
+      it 'priceは¥299以下では出品できない' do
         @item.price = 100
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Please set the price range between ¥300 and ¥9,999,999")
+      end
+
+      it 'priceは¥10,000,000以上では出品できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Please set the price range between ¥300 and ¥9,999,999")
+      end
+
+      it 'userが紐付いていない場合は出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
