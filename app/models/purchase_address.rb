@@ -1,6 +1,6 @@
 class PurchaseAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :block, :building_name, :phone_number, :purchase_id
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipalities, :block, :building_name, :phone_number, :token
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "In the correct form with a half-width hyphen" }
     validates :prefecture_id, numericality: { other_than: 1, message: "Please select an item" }
@@ -9,6 +9,7 @@ class PurchaseAddress
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "is invalid. An integer of 10 or 11 digits" }
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   def save
