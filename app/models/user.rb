@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :items
+  has_many :purchases
   with_options presence: true do
     validates :nickname
     with_options format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: 'is invalid Input full-width characters' } do
@@ -18,5 +19,5 @@ class User < ApplicationRecord
   end
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'Please include both letters and numbers'
-  validates :email, uniqueness: true
+  validates :email, uniqueness: { case_sensitive: false }
 end
