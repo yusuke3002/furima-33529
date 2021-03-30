@@ -37,7 +37,7 @@ before_action :move_to_top_page, only: [:index, :create]
   end
 
   def move_to_top_page
-    if current_user.id == @item.user_id
+    if item.purchase.present? && current_user.id == @item.user_id
       redirect_to root_path
     end
   end

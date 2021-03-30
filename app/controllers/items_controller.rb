@@ -26,11 +26,7 @@ class ItemsController < ApplicationController
 
   def edit
     if @item.purchase.present?
-      if user_signed_in?
-        redirect_to root_path
-      else
-        redirect_to new_user_session_path
-      end
+      redirect_to root_path
     end
   end
 

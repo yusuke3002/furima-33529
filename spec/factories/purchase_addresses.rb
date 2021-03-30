@@ -6,7 +6,6 @@ FactoryBot.define do
     municipalities { '大阪市北区' }
     block { '梅田' }
     phone_number { '09012345678' }
-    association :item
   
   end
 end
