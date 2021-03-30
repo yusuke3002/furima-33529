@@ -5,7 +5,7 @@ FactoryBot.define do
     prefecture_id { 2 }
     municipalities { '大阪市北区' }
     block { '梅田' }
+    building_name { '梅田ビル' }
     phone_number { '09012345678' }
-  
   end
 end

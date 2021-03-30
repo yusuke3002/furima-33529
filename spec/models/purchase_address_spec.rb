@@ -13,6 +13,10 @@ RSpec.describe PurchaseAddress, type: :model do
       it "必要な値が正しく入力されていれば購入できること" do
         expect(@purchase_address).to be_valid
       end
+
+      it "建物名が空でも購入できること" do
+        @purchase_address.building_name = nil
+      end
     end
 
     context "購入できない時" do
@@ -58,6 +62,11 @@ RSpec.describe PurchaseAddress, type: :model do
       end
       it "phone_numberは11桁より多ければ購入できないこと" do
         @purchase_address.phone_number = "090123456789"
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. An integer of 10 or 11 digits")
+      end
+      it "phone_numberは英数混合では購入できないこと" do
+        @purchase_address.phone_number = "abc123456789"
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. An integer of 10 or 11 digits")
       end
