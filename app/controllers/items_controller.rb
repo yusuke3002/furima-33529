@@ -25,6 +25,13 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.purchase.present?
+      if user_signed_in?
+        redirect_to root_path
+      else
+        redirect_to new_user_session_path
+      end
+    end
   end
 
   def update
